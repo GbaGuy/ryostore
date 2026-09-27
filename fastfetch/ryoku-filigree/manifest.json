@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "id": "ryoku-filigree",
+  "category": "fastfetch",
+  "version": "1.0.0",
+  "destination": "ryoku/fastfetch/ryoku-filigree",
+  "files": [
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "mode": "0644",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "install": false
+    },
+    {
+      "source": "PROVENANCE.txt",
+      "destination": "PROVENANCE.txt",
+      "mode": "0644",
+      "size": 754,
+      "sha256": "7e69b914a61f2aad9456137e7659936a716b79a427caa82d795147d2c87ecf49",
+      "install": false
+    },
+    {
+      "source": "assets/artwork.png",
+      "destination": "assets/artwork.png",
+      "mode": "0644",
+      "size": 594369,
+      "sha256": "4465ec2f065b7ca4262af345a1a3952b5dd669a16d8fcd7ed7d05d70536259f5",
+      "install": true
+    },
+    {
+      "source": "assets/logo-mark-v2-ornament.png",
+      "destination": "assets/logo-mark-v2-ornament.png",
+      "mode": "0644",
+      "size": 56706,
+      "sha256": "f89703f406310b81022cc0ffaf6dd18cc9381c367ca3378ed4fd0efa49104a19",
+      "install": true
+    },
+    {
+      "source": "bin/ryoku-fetch",
+      "destination": "bin/ryoku-fetch",
+      "mode": "0755",
+      "size": 9526,
+      "sha256": "400093d487706d05329a97f2fe274b7dbd23ffb13a0f80c6226b4ed5a9e56426",
+      "install": true
+    },
+    {
+      "source": "config.jsonc",
+      "destination": "config.jsonc",
+      "mode": "0644",
+      "size": 932,
+      "sha256": "723acbbd8c355ffc8b0348e203d79b407b8e39e98b480a7426b3e2d3ec2c481f",
+      "install": true
+    },
+    {
+      "source": "preview.webp",
+      "destination": "preview.webp",
+      "mode": "0644",
+      "size": 21010,
+      "sha256": "40089794c4ec5b48fb4379e580eebd1c46c60262cc95de1c8a139fa8d3895f66",
+      "install": false
+    }
+  ],
+  "license": "GPL-3.0-only"
+}

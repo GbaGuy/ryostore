@@ -1,0 +1,16 @@
+Ryoku Filigree is co-authored by aethctl and Sipper1236.
+
+Composition inspiration and collaboration credit:
+https://github.com/Sipper1236/inspo-fastfetch
+
+The Ryostore-native edition preserves the locked v18 Ryoku composition while
+removing the standalone installer's machine-specific shim state. The renderer
+is product-local, uses Ryoku's selected Fastfetch config, and resolves the real
+Fastfetch binary from the platform at runtime.
+
+No code or artwork from Sipper1236/inspo-fastfetch is redistributed here unless
+separate redistribution permission is provided. The shipped ornamental artwork
+and Ryoku mark treatment are the Ryoku submission assets.
+
+The renderer uses only local files and local system information. It contacts no
+network services.
