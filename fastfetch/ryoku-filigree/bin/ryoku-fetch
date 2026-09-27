@@ -1,0 +1,305 @@
+#!/usr/bin/env python3
+"""Ryoku's Kitty/icat Fastfetch composition."""
+import fcntl
+import json
+import math
+import os
+from pathlib import Path
+import re
+import select
+import shutil
+import struct
+import subprocess
+import sys
+import termios
+import time
+import tty
+
+ROOT = Path(__file__).resolve().parent.parent
+ASSETS = ROOT / "assets"
+CONFIG = ROOT / "config.jsonc"
+ARTWORK = ASSETS / "artwork.png"
+LOGO = ASSETS / "logo-mark-v2-ornament.png"
+LOGO_W = 556
+LOGO_H = 482
+ANSI = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
+
+ART_W = 1786
+ART_H = 881
+
+def cursor_position():
+    fd = os.open("/dev/tty", os.O_RDWR | os.O_NOCTTY)
+    previous = termios.tcgetattr(fd)
+    try:
+        tty.setcbreak(fd)
+        os.write(fd, b"\x1b[6n")
+        response = b""
+        deadline = time.monotonic() + 0.6
+        while time.monotonic() < deadline:
+            if select.select([fd], [], [], max(0, deadline - time.monotonic()))[0]:
+                response += os.read(fd, 128)
+                match = re.search(rb"\x1b\[(\d+);(\d+)R", response)
+                if match:
+                    return int(match[1]) - 1, int(match[2]) - 1
+        return None
+    finally:
+        termios.tcsetattr(fd, termios.TCSANOW, previous)
+        os.close(fd)
+
+def move(row, col):
+    sys.stdout.write(f"\x1b[{row + 1};{col + 1}H")
+
+def hex_rgb(value, fallback):
+    text = str(value or "").strip().lstrip("#")
+    if len(text) == 6:
+        try:
+            return tuple(int(text[i:i+2], 16) for i in (0, 2, 4))
+        except ValueError:
+            pass
+    return fallback
+
+def palette():
+    path = Path(os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache"))) / "ryoku/colors.json"
+    try:
+        data = json.loads(path.read_text())
+    except Exception:
+        data = {}
+
+    accent = hex_rgb(
+        data.get("primary") or data.get("color2"),
+        (226, 176, 150),
+    )
+    text = hex_rgb(
+        data.get("onSurface") or data.get("foreground") or data.get("color7"),
+        (224, 216, 208),
+    )
+    muted = hex_rgb(
+        data.get("onSurfaceVariant") or data.get("color8"),
+        (157, 148, 140),
+    )
+    return accent, text, muted
+
+def esc(rgb, bold=False):
+    prefix = "1;" if bold else ""
+    return f"\x1b[{prefix}38;2;{rgb[0]};{rgb[1]};{rgb[2]}m"
+
+def distro_id():
+    user = os.environ.get("USER") or subprocess.getoutput("id -un").strip() or "user"
+    distro = "linux"
+    try:
+        for line in Path("/etc/os-release").read_text().splitlines():
+            if line.startswith("ID="):
+                distro = line.split("=", 1)[1].strip().strip('"') or distro
+                break
+    except OSError:
+        pass
+    return user, distro
+
+def icat_binary():
+    kitten = shutil.which("kitten")
+    if kitten:
+        return [kitten, "icat"]
+    kitty = shutil.which("kitty")
+    if kitty:
+        return [kitty, "+kitten", "icat"]
+    return None
+
+def plain_fallback(lines, accent, text, muted):
+    user, distro = distro_id()
+    print(f"{esc(text, True)}RYOKU\x1b[0m  {esc(accent)}緑\x1b[0m")
+    print(f"{esc(text)}{user}@{distro}\x1b[0m  {esc(muted)}利用者・環境\x1b[0m")
+    print()
+    for line in lines:
+        parts = line.split(maxsplit=1)
+        if len(parts) == 2:
+            print(f"{esc(accent, True)}{parts[0]:<4}\x1b[0m  {esc(text)}{parts[1]}\x1b[0m")
+        else:
+            print(f"{esc(text)}{line}\x1b[0m")
+
+def main():
+    arguments = sys.argv[1:]
+    user_shim = Path.home() / ".local/bin/fastfetch"
+    candidates = [
+        os.environ.get("RYOKU_FASTFETCH_REAL", ""),
+        "/run/current-system/sw/bin/fastfetch",
+        "/usr/bin/fastfetch",
+        "/bin/fastfetch",
+        shutil.which("fastfetch") or "",
+    ]
+    binary = ""
+    for candidate in candidates:
+        if not candidate:
+            continue
+        path = Path(candidate)
+        if not path.is_file() or not os.access(path, os.X_OK):
+            continue
+        try:
+            if path.resolve() == user_shim.resolve():
+                continue
+        except OSError:
+            pass
+        binary = str(path)
+        break
+
+    if not binary:
+        print("ryoku-fetch: could not locate the real fastfetch binary", file=sys.stderr)
+        return 1
+
+    # CLI arguments are passed straight to real Fastfetch. The ornamental
+    # composition is only the normal no-argument interactive presentation.
+    if arguments:
+        return subprocess.run(
+            [binary, "--config", str(CONFIG), *arguments],
+            check=False,
+        ).returncode
+
+    command = [binary, "--config", str(CONFIG), "--logo-type", "none", "--pipe", "true"]
+    result = subprocess.run(command, capture_output=True, text=True, timeout=12)
+    if result.returncode:
+        sys.stderr.write(result.stderr)
+        return result.returncode
+
+    lines = [ANSI.sub("", line).strip() for line in result.stdout.splitlines() if line.strip()]
+    lines = [line.replace("(R)", "").replace("(TM)", "") for line in lines]
+    accent, text, muted = palette()
+
+    kitty_session = (
+        sys.stdout.isatty()
+        and bool(os.environ.get("KITTY_WINDOW_ID"))
+        and ARTWORK.is_file()
+        and LOGO.is_file()
+        and icat_binary() is not None
+        and not arguments
+    )
+    if not kitty_session:
+        plain_fallback(lines, accent, text, muted)
+        return 0
+
+    rows, cols, xp, yp = struct.unpack(
+        "HHHH", fcntl.ioctl(sys.stdout.fileno(), termios.TIOCGWINSZ, b"\0" * 8)
+    )
+    icat = icat_binary()
+    if not xp or not yp:
+        size = subprocess.check_output(icat + ["--print-window-size"], text=True)
+        xp, yp = map(int, size.strip().split("x"))
+
+    cell_w, cell_h = xp / cols, yp / rows
+
+    # The Ryoku mark is a second image layer to the left of the ornament.
+    # Both keep their native aspect ratios. The frame remains large enough to
+    # wrap the text while the mark gets roughly the same visual height as the
+    # vertical filigree without being stretched.
+    height = min(16, rows - 4)
+    frame_width = math.ceil(height * cell_h / cell_w * ART_W / ART_H)
+    logo_height = max(7, round(height * 0.40))
+    logo_width = math.ceil(logo_height * cell_h / cell_w * LOGO_W / LOGO_H)
+    gap = 0
+    total_width = logo_width + gap + frame_width
+
+    if total_width > cols - 2:
+        scale = (cols - 2) / total_width
+        height = max(12, math.floor(height * scale))
+        frame_width = math.ceil(height * cell_h / cell_w * ART_W / ART_H)
+        logo_height = max(7, round(height * 0.40))
+        logo_width = math.ceil(logo_height * cell_h / cell_w * LOGO_W / LOGO_H)
+        total_width = logo_width + gap + frame_width
+
+    if frame_width < 50 or height < 12 or height + 3 > rows or len(lines) > 8:
+        plain_fallback(lines, accent, text, muted)
+        return 0
+
+    # Reserve terminal space before painting so invocation near the bottom scrolls normally.
+    sys.stdout.write("\n" * (height + 1))
+    sys.stdout.flush()
+
+    position = cursor_position()
+    if position is None:
+        plain_fallback(lines, accent, text, muted)
+        return 0
+
+    bottom = position[0]
+    top = bottom - height - 1
+    left = 3
+
+    move(top, left)
+    sys.stdout.flush()
+
+    # Ryoku mark. Give it its own icat layer so the original asset stays crisp
+    # and proportional rather than being baked or distorted into the frame.
+    logo_top = top + max(0, (height - logo_height) // 2)
+    subprocess.run(
+        icat
+        + [
+            "--stdin=no",
+            "--transfer-mode=stream",
+            "--z-index=-1",
+            "--scale-up",
+            "--align=center",
+            "--place",
+            f"{logo_width}x{logo_height}@{left}x{logo_top}",
+            "--use-window-size",
+            f"{cols},{rows},{xp},{yp}",
+            str(LOGO),
+        ],
+        check=True,
+    )
+
+    # Ornamental frame and sword sit immediately to the right of the mark.
+    frame_left = left + logo_width + 1
+    subprocess.run(
+        icat
+        + [
+            "--stdin=no",
+            "--transfer-mode=stream",
+            "--z-index=-1",
+            "--scale-up",
+            "--align=left",
+            "--place",
+            f"{frame_width}x{height}@{frame_left}x{top}",
+            "--use-window-size",
+            f"{cols},{rows},{xp},{yp}",
+            str(ARTWORK),
+        ],
+        check=True,
+    )
+
+    # Text stays inside the ornamental frame, not inside the Ryoku mark.
+    text_x = frame_left + max(20, math.ceil(frame_width * 0.365))
+    text_y = top + max(2, round(height * 0.19))
+    room = cols - text_x - 1
+
+    user, distro = distro_id()
+
+    move(text_y, text_x)
+    sys.stdout.write(f"{esc(text, True)}RYOKU\x1b[0m  {esc(accent)}緑\x1b[0m")
+
+    move(text_y + 1, text_x)
+    sys.stdout.write(
+        f"{esc(text)}{user}@{distro}\x1b[0m  "
+        f"{esc(muted)}利用者・環境\x1b[0m"
+    )
+
+    spec_y = text_y + 3
+    for index, line in enumerate(lines):
+        move(spec_y + index, text_x)
+        parts = line.split(maxsplit=1)
+        if len(parts) == 2:
+            key, value = parts
+            rendered = (
+                f"{esc(accent, True)}{key:<4}\x1b[0m  "
+                f"{esc(text)}{value[:max(0, room - 7)]}\x1b[0m"
+            )
+        else:
+            rendered = f"{esc(text)}{line[:room]}\x1b[0m"
+        sys.stdout.write(rendered)
+
+    move(bottom, 0)
+    sys.stdout.flush()
+    return 0
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, subprocess.SubprocessError) as exc:
+        print(f"ryoku-fetch: {exc}", file=sys.stderr)
+        raise SystemExit(1)
