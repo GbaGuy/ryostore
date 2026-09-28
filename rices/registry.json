@@ -183,7 +183,7 @@
       "palette": "rices/ryoku-paper-light/palette.json",
       "rounding": 8,
       "wallpaper": "https://github.com/eduardojvieira/ryostore/releases/download/rices/ryoku-paper-light-stoic-wall.png",
-      "upstream": "https://github.com/eduardojvieira/Homelab/tree/master/Ryoku",
+      "upstream": "https://github.com/eduardojvieira/ryostore/tree/feat/ryoku-paper-rices/rices/ryoku-paper-light",
       "official": false,
       "lastUpdated": "2026-09-28"
     },
@@ -215,7 +215,7 @@
       "palette": "rices/ryoku-paper-dark/palette.json",
       "rounding": 8,
       "wallpaper": "https://github.com/eduardojvieira/ryostore/releases/download/rices/ryoku-paper-dark-stoic-wall.png",
-      "upstream": "https://github.com/eduardojvieira/Homelab/tree/master/Ryoku",
+      "upstream": "https://github.com/eduardojvieira/ryostore/tree/feat/ryoku-paper-rices/rices/ryoku-paper-dark",
       "official": false,
       "lastUpdated": "2026-09-28"
     }
