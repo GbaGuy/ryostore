@@ -2,7 +2,7 @@
   "schema": 1,
   "id": "ryoku-paper-dark",
   "category": "rices",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "destination": "ryoku/rices/ryoku-paper-dark",
   "slug": "ryoku-paper-dark",
   "name": "Ryoku Paper Dark",
@@ -633,8 +633,8 @@
       "source": "screenshots/desktop.webp",
       "destination": "screenshots/desktop.webp",
       "mode": "0644",
-      "size": 353900,
-      "sha256": "623dc8c5c8f2d4f57106533debf96a511e89d6888b5c99f468958d571397345a",
+      "size": 279260,
+      "sha256": "8bee1ca5bd6fc437d3deccf66b0add0892506938648012ab057ccaa6fe79be5b",
       "install": false
     }
   ],

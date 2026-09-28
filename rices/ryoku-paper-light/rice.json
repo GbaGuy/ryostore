@@ -2,7 +2,7 @@
   "schema": 1,
   "id": "ryoku-paper-light",
   "category": "rices",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "destination": "ryoku/rices/ryoku-paper-light",
   "slug": "ryoku-paper-light",
   "name": "Ryoku Paper Light",
@@ -633,8 +633,8 @@
       "source": "screenshots/desktop.webp",
       "destination": "screenshots/desktop.webp",
       "mode": "0644",
-      "size": 320632,
-      "sha256": "53243e789a1269b1f85e90e019421354a4ca22973f96df00b0029d03d40ee3a0",
+      "size": 224910,
+      "sha256": "4955b5c72179612a41844b8d8906c5c7c40e8382b3c0817e09fe5ee99d4398b6",
       "install": false
     }
   ],
