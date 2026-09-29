@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "id": "ryoku-discord",
+  "category": "vesktop-themes",
+  "version": "1.22.2",
+  "destination": "vesktop/themes/ryoku-discord",
+  "files": [
+    {
+      "source": "Ryoku.theme.css",
+      "destination": "Ryoku.theme.css",
+      "mode": "0644",
+      "size": 353225,
+      "sha256": "133cf3c9c6be7519aeace99b3eb9f4b3940b16f155e8e3e6ea79e7b8830d5637",
+      "install": true
+    },
+    {
+      "source": "README.md",
+      "destination": "README.md",
+      "mode": "0644",
+      "size": 945,
+      "sha256": "c0f63214c5de235a3f60e51b151746d67c87be2912f9c21c3a78d0192f0bcb8c",
+      "install": false
+    },
+    {
+      "source": "assets/preview.png",
+      "destination": "preview.png",
+      "mode": "0644",
+      "size": 316990,
+      "sha256": "a75a212669be67b9e633a639f3f62a826fa78e54f87ea50564b3a35d96b65fbf",
+      "install": false
+    }
+  ]
+}

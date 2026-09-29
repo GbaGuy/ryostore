@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "vesktop-themes": [
+    {
+      "id": "ryoku-discord",
+      "name": "Ryoku Discord",
+      "version": "1.22.2",
+      "path": "vesktop-themes/ryoku-discord",
+      "author": "Ron (original), Sipper1236 (adaptation)",
+      "upstream": "https://github.com/Sipper1236/ryoku-discord",
+      "summary": "Ryoku Discord theme with optional live palette colors",
+      "description": "A red and gold Vesktop theme with optional Ryoku Palette Bridge colors and reduced motion support.",
+      "tags": ["vesktop", "discord", "theme", "palette"],
+      "accent": "#e2342a",
+      "surface": "#2a2a2a",
+      "preview": "assets/preview.png",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "3e7538064388a3609f8befd21cea06785ab002e10e3125dec79da0e73fa662bb",
+      "official": false,
+      "lastUpdated": "2026-09-29"
+    }
+  ]
+}
