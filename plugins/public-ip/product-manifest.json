@@ -46,6 +46,14 @@
       "install": false
     },
     {
+      "source": "assets/preview-widget.png",
+      "destination": "assets/preview-widget.png",
+      "sha256": "3336ca26efc7f885c0295dba06af02a613f6d1f864ac7bd8c99c439c6645db6f",
+      "mode": "0644",
+      "size": 2154,
+      "install": false
+    },
+    {
       "source": "bin/copy.sh",
       "destination": "bin/copy.sh",
       "sha256": "156bb00bbc1324db4058b7d695f19895411ee85046ca5cae57859c70187aa47b",
@@ -64,9 +72,9 @@
     {
       "source": "content/Widget.qml",
       "destination": "content/Widget.qml",
-      "sha256": "8e893c2581c100b516f2b92ab0300e7d5376a25b477e735d5babcb197e7ec883",
+      "sha256": "56da24fb7fa8cfba7c3c1e0ca0ee6e902516cbdabb92887dc5d04606f6374f37",
       "mode": "0644",
-      "size": 2887,
+      "size": 3132,
       "install": true
     },
     {
@@ -84,14 +92,6 @@
       "mode": "0644",
       "size": 2451,
       "install": true
-    },
-    {
-      "source": "assets/preview-widget.png",
-      "destination": "assets/preview-widget.png",
-      "sha256": "3336ca26efc7f885c0295dba06af02a613f6d1f864ac7bd8c99c439c6645db6f",
-      "mode": "0644",
-      "size": 2154,
-      "install": false
     }
   ]
 }

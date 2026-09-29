@@ -22,13 +22,17 @@ Item {
     readonly property bool lastPollFailed: service ? service.lastPollFailed : false
     readonly property bool copied: service ? service.copied : false
 
-    implicitWidth: row.implicitWidth
+    // Built-in bar widgets pad 9px per side; the plugin host pads only 6. Add 3
+    // per side so the gap to neighbouring widgets matches the built-ins.
+    readonly property real sidePad: 3 * root.s
+    implicitWidth: row.implicitWidth + 2 * root.sidePad
     implicitHeight: Math.max(row.implicitHeight, 18 * root.s)
 
     Row {
         id: row
+        x: root.sidePad
         anchors.verticalCenter: parent.verticalCenter
-        spacing: 6 * root.s
+        spacing: 4 * root.s
 
         // A globe mark: stroke-only vector path in a 24x24 box, the same
         // technique Ryoku's own GlyphIcon uses.
