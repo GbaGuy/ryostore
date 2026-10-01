@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "id": "sukunabikona",
+  "category": "barstyles",
+  "version": "1.0.0",
+  "destination": "ryoku/barstyles/sukunabikona",
+  "files": [
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "mode": "0644",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "install": true
+    },
+    {
+      "source": "PROVENANCE.txt",
+      "destination": "PROVENANCE.txt",
+      "mode": "0644",
+      "size": 566,
+      "sha256": "d9813070ce3464fa0af05be89c1d5dba612f5d7ce95ecdfa6d673428cd83bc20",
+      "install": true
+    },
+    {
+      "source": "README.md",
+      "destination": "README.md",
+      "mode": "0644",
+      "size": 2154,
+      "sha256": "75c63ce604ce7d9996c14c3b982ffc9d28affe0fbb96f8971221cacc140a44f9",
+      "install": true
+    },
+    {
+      "source": "Scene.qml",
+      "destination": "Scene.qml",
+      "mode": "0644",
+      "size": 27044,
+      "sha256": "53c9405cf72527c834f7e5468eaaceaefe40a5713197b1c81feced88b4c6d60a",
+      "install": true
+    },
+    {
+      "source": "assets/preview.webp",
+      "destination": "assets/preview.webp",
+      "mode": "0644",
+      "size": 34368,
+      "sha256": "2337be6077e5464470f5f8d5fb6f3b3d4a83b4f99864e2ee23e389bd0a29d0b5",
+      "install": false
+    },
+    {
+      "source": "components/RyokuRail.qml",
+      "destination": "components/RyokuRail.qml",
+      "mode": "0644",
+      "size": 28438,
+      "sha256": "82fd79ab4f179ac352cb92807bc4282386198d0be598153fec8e332137ee7236",
+      "install": true
+    }
+  ],
+  "license": "GPL-3.0-only"
+}

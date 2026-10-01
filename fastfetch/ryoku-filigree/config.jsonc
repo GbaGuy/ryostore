@@ -1,0 +1,54 @@
+// ryoku:renderer ryoku-filigree/bin/ryoku-fetch
+// Co-authored by aethctl and Sipper1236.
+{
+  "logo": {
+    "type": "none"
+  },
+  "display": {
+    "separator": " ",
+    "key": {
+      "width": 0
+    },
+    "percent": {
+      "type": 0
+    }
+  },
+  "modules": [
+    {
+      "type": "os",
+      "key": " ",
+      "format": "{name} {version}"
+    },
+    {
+      "type": "wm",
+      "key": " ",
+      "format": "{pretty-name} ({protocol-name})"
+    },
+    {
+      "type": "cpu",
+      "key": " ",
+      "format": "{name}"
+    },
+    {
+      "type": "gpu",
+      "key": "󰢮 ",
+      "format": "{name}",
+      "detectionMethod": "pci"
+    },
+    {
+      "type": "memory",
+      "key": " ",
+      "format": "{used} / {total}"
+    },
+    {
+      "type": "uptime",
+      "key": " ",
+      "format": "{formatted}"
+    },
+    {
+      "type": "media",
+      "key": " ",
+      "format": "{title}  —  {artist}"
+    }
+  ]
+}
