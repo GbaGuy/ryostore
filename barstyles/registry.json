@@ -4,9 +4,11 @@
     {
       "id": "nacre",
       "name": "Nacre",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "path": "barstyles/nacre",
       "author": "Ryoku Team",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/barstyles/nacre",
+      "discord": "https://discord.gg/8KjBmUEyKA",
       "summary": "Instrument archipelago",
       "description": "Configurable islands whose widgets and spacing compose into a technical top bar.",
       "tags": [
@@ -19,7 +21,7 @@
       "preview": "assets/preview.webp",
       "screenshots": [],
       "manifest": "manifest.json",
-      "manifestSha256": "d3af8e0814709ae83c690918a9cca4fc794dc8dd89bbae110162c57e6a6b0ac1"
+      "manifestSha256": "819fac41dc92d267260fd998bf8a95f1155ce1a1318440e890d4c5e59943e8fa"
     },
     {
       "id": "obi",
@@ -27,6 +29,8 @@
       "version": "1.0.1",
       "path": "barstyles/obi",
       "author": "Ryoku Team",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/barstyles/obi",
+      "discord": "https://discord.gg/8KjBmUEyKA",
       "summary": "Floating sash",
       "description": "A compact floating top bar with kanji workspaces, paper groups, and live popouts.",
       "tags": [
@@ -39,7 +43,143 @@
       "preview": "assets/preview.webp",
       "screenshots": [],
       "manifest": "manifest.json",
-      "manifestSha256": "b8e6d5be1d73557a7da36896cfe495efee0a2c9f67264739c535c52d0b2e9730"
+      "manifestSha256": "eef9f2b23a6466ff5f131a0ea928593c71a8d7bd50354679cafa2b979adae58b"
+    },
+    {
+      "id": "imi",
+      "name": "Imi",
+      "version": "1.0.1",
+      "path": "barstyles/imi",
+      "author": "dodo986",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/barstyles/imi",
+      "summary": "Material 3 Island Bar",
+      "description": "Material 3-Like design with morphing popouts, kanji workspaces, audio visualizer, and customizable widget pills.",
+      "windowManager": "hyprland",
+      "windowManagerReason": "Written against Hyprland's own window and workspace model, so it does not run on niri yet.",
+      "tags": [
+        "top",
+        "material3",
+        "islands",
+        "morphing",
+        "customizable",
+        "visualizer"
+      ],
+      "accent": "#9ecaff",
+      "surface": "#141318",
+      "preview": "assets/preview.png",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "b9b2b59fa99ab0b02b26be3ce1905c9e71988543608f916e5d1d22c61624a3b7",
+      "lastUpdated": "2026-09-08",
+      "official": false,
+      "license": "GPL-3.0-only"
+    },
+    {
+      "id": "ricelin",
+      "name": "Ricelin",
+      "version": "1.1.1",
+      "path": "barstyles/ricelin",
+      "author": "feelyourwarmth",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/barstyles/ricelin",
+      "summary": "A sleek, customizable pill-style bar for Ryoku.",
+      "description": "Ricelin is a modern pill-style bar focused on clean visuals, smooth animations, dynamic theming, and extensive customization. It integrates with Ryoku and supports dynamic colors.",
+      "tags": [
+        "bar",
+        "barstyle",
+        "pill",
+        "minimal",
+        "modern",
+        "customizable"
+      ],
+      "accent": "#5b9bff",
+      "surface": "#181a20",
+      "preview": "assets/preview.webp",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "53834e6b716f6569ccc82a752bcaa473ec34f515ef0760f52efd53e8c24edb3a",
+      "official": false,
+      "lastUpdated": "2026-10-02"
+    },
+    {
+      "id": "chroma",
+      "name": "Chroma",
+      "version": "1.0.1",
+      "path": "barstyles/chroma",
+      "author": "aethctl",
+      "upstream": "https://github.com/aethctl/chroma-shell",
+      "summary": "Matugen signal bar",
+      "description": "A colourful modular Ryoku top bar with wallpaper-driven theming, workspace controls, media integration, utilities, and playback visualisation.",
+      "tags": [
+        "top",
+        "horizontal",
+        "matugen",
+        "media",
+        "workspaces"
+      ],
+      "accent": "#9bd8f5",
+      "surface": "#10191f",
+      "preview": "assets/preview.png",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "5f89f751af38057cd3e4f70e4245f659abb798092fffb7dbf1f3e3a5ee14380e",
+      "lastUpdated": "2026-10-02",
+      "official": false,
+      "license": "MIT"
+    },
+    {
+      "id": "orbit",
+      "name": "Orbit",
+      "version": "1.0.1",
+      "path": "barstyles/orbit",
+      "author": "aethctl",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/barstyles/orbit",
+      "summary": "Animated trajectory bar",
+      "description": "A motion-led top bar built around a live trajectory, adaptive media core, workspace satellites, native tray, and docked system popouts.",
+      "tags": [
+        "top",
+        "trajectory",
+        "animated",
+        "media",
+        "popouts",
+        "minimal"
+      ],
+      "accent": "#9aa7e8",
+      "surface": "#11131b",
+      "preview": "assets/preview.webp",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "434e0f6da7dce44976d866d29e5d9a59962232f06b6eff7eef04444a6b55388a",
+      "lastUpdated": "2026-10-02",
+      "official": false,
+      "license": "GPL-3.0-only"
+    },
+    {
+      "id": "sukunabikona",
+      "name": "Sukunabikona",
+      "version": "1.0.1",
+      "path": "barstyles/sukunabikona",
+      "author": "aethctl",
+      "upstream": "https://github.com/Ryoku-dev/ryostore/tree/main/barstyles/sukunabikona",
+      "summary": "Adaptive rail-to-pill command surface",
+      "description": "A Matugen-aware Ryoku bar style that expands into a full left command rail on empty or floating-only workspaces and collapses into a three-pill top bar when tiled windows appear.",
+      "tags": [
+        "adaptive",
+        "rail",
+        "pills",
+        "matugen",
+        "media",
+        "workspaces",
+        "visualizer"
+      ],
+      "accent": "#d58b73",
+      "surface": "#120d0c",
+      "preview": "assets/preview.webp",
+      "screenshots": [],
+      "manifest": "manifest.json",
+      "manifestSha256": "f7b25b78c8c752f6732e830f8fe041f5110c3b2b6f9dded37bbf8faed191d3ba",
+      "lastUpdated": "2026-10-02",
+      "official": false,
+      "license": "GPL-3.0-only"
     }
   ]
 }

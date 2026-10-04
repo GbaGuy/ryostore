@@ -7,7 +7,9 @@
       "version": "1.0.0",
       "path": "rices/aperture",
       "author": "Ryoku Team",
-      "summary": "A crisp, brutalist instrument. Square corners, tight gaps, a hard-edged frame\u2026",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/rices/aperture",
+      "discord": "https://discord.gg/8KjBmUEyKA",
+      "summary": "A crisp, brutalist instrument. Square corners, tight gaps, a hard-edged frame…",
       "description": "A crisp, brutalist instrument. Square corners, tight gaps, a hard-edged frame and no glass; colours track your wallpaper through matugen, so any wall becomes a sharp technical desktop.",
       "tags": [
         "adaptive",
@@ -32,7 +34,9 @@
       "version": "1.0.0",
       "path": "rices/lumen",
       "author": "Ryoku Team",
-      "summary": "Soft and airy. Rounded corners, generous gaps, a glassy blur and a gentle lift\u2026",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/rices/lumen",
+      "discord": "https://discord.gg/8KjBmUEyKA",
+      "summary": "Soft and airy. Rounded corners, generous gaps, a glassy blur and a gentle lift…",
       "description": "Soft and airy. Rounded corners, generous gaps, a glassy blur and a gentle lift; colours track your wallpaper through matugen, so any wall becomes a calm, luminous desktop.",
       "tags": [
         "adaptive",
@@ -57,7 +61,9 @@
       "version": "1.0.0",
       "path": "rices/evangelion",
       "author": "Ryoku Team",
-      "summary": "Unit-01. Purple and neon green on a black void, a hard-edged frame, NERV decor\u2026",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/rices/evangelion",
+      "discord": "https://discord.gg/8KjBmUEyKA",
+      "summary": "Unit-01. Purple and neon green on a black void, a hard-edged frame, NERV decor…",
       "description": "Unit-01. Purple and neon green on a black void, a hard-edged frame, NERV decor and a rebranded seal. The wallpaper carries the beast; the chrome runs the operation.",
       "tags": [
         "evangelion",
@@ -80,8 +86,138 @@
       "color": "fixed",
       "palette": "rices/evangelion/palette.json",
       "rounding": 4,
-      "wallpaper": "https://github.com/neur0map/ryostore/releases/download/rices/evangelion-wall.png",
-      "hero": "https://github.com/neur0map/ryostore/releases/download/rices/evangelion-hero.jpg"
+      "wallpaper": "https://github.com/ryoku-dev/ryostore/releases/download/rices/evangelion-wall.png",
+      "hero": "https://github.com/ryoku-dev/ryostore/releases/download/rices/evangelion-hero.jpg"
+    },
+    {
+      "id": "yuk",
+      "name": "Yuk",
+      "version": "1.0.0",
+      "path": "rices/yuk",
+      "author": "feelyourwarmth",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/rices/yuk",
+      "summary": "Warm autumn tones, glass and rounded windows",
+      "description": "A Japanese autumn desktop with warm wallpaper colours, translucent surfaces, rounded windows and a restrained frame.",
+      "tags": [
+        "adaptive",
+        "dark",
+        "glass",
+        "rounded",
+        "minimal",
+        "japanese",
+        "autumn",
+        "warm"
+      ],
+      "accent": "#e0563b",
+      "surface": "#241b1a",
+      "preview": "screenshots/1.webp",
+      "screenshots": [
+        "screenshots/1.webp"
+      ],
+      "manifest": "rice.json",
+      "manifestSha256": "677b1721c496fc9c9eeb04ea1778d780f767054b8661e805e251374b746c1fc9",
+      "createdWith": "0.50.0-beta.19",
+      "color": "wallpaper",
+      "rounding": 6,
+      "wallpaper": "https://github.com/ryoku-dev/ryostore/releases/download/rices/yuk-wall.jpg",
+      "official": false,
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": "monolith",
+      "name": "Monolith",
+      "version": "1.0.0",
+      "path": "rices/monolith",
+      "author": "aethctl",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/rices/monolith",
+      "summary": "A restrained architectural Ryoku desktop built around sharp geometry, negative…",
+      "description": "A restrained architectural Ryoku desktop built around sharp geometry, negative space, mechanical motion and a structural two-axis frame.",
+      "tags": [
+        "adaptive",
+        "architectural",
+        "minimal",
+        "structural",
+        "dark",
+        "mechanical"
+      ],
+      "accent": "#e0563b",
+      "surface": "#0e1416",
+      "preview": "assets/preview.webp",
+      "screenshots": [],
+      "manifest": "rice.json",
+      "manifestSha256": "9411b07ae41f525a80f11780433a05e1e6e89158aece582c31fb90ead27db27b",
+      "blurb": "A restrained architectural Ryoku desktop built around sharp geometry, negative space, mechanical motion and a structural two-axis frame.",
+      "createdWith": "0.63.1-beta.19",
+      "color": "wallpaper",
+      "rounding": 2,
+      "wallpaper": "https://github.com/ryoku-dev/ryostore/releases/download/rices/monolith-wall.jpg",
+      "hero": "https://github.com/ryoku-dev/ryostore/releases/download/rices/monolith-hero.jpg",
+      "lastUpdated": "2026-09-11",
+      "official": false
+    },
+    {
+      "id": "ryoku-paper-light",
+      "name": "Ryoku Paper Light",
+      "version": "1.0.1",
+      "path": "rices/ryoku-paper-light",
+      "author": "Eduardo Vieira",
+      "summary": "Sunlit washi, bronze accents, and a calm editorial Ryoku desktop.",
+      "description": "A luminous paper-and-marble Ryoku desktop with a left rail, restrained bronze accents, and a classical marble statue against the Great Wave.",
+      "tags": [
+        "light",
+        "paper",
+        "editorial",
+        "marble",
+        "warm"
+      ],
+      "accent": "#6F4B17",
+      "surface": "#F5F0E6",
+      "preview": "screenshots/desktop.webp",
+      "screenshots": [
+        "screenshots/desktop.webp"
+      ],
+      "manifest": "rice.json",
+      "manifestSha256": "62bca8185a6170616a5eaee6cf065ba4ddba7bd32b3aa06b5b539cfb16dc7c50",
+      "createdWith": "0.63.1-beta.19",
+      "color": "fixed",
+      "palette": "rices/ryoku-paper-light/palette.json",
+      "rounding": 8,
+      "wallpaper": "https://github.com/eduardojvieira/ryostore/releases/download/rices/ryoku-paper-light-stoic-wall.png",
+      "upstream": "https://github.com/eduardojvieira/ryostore/tree/feat/ryoku-paper-rices/rices/ryoku-paper-light",
+      "official": false,
+      "lastUpdated": "2026-09-28"
+    },
+    {
+      "id": "ryoku-paper-dark",
+      "name": "Ryoku Paper Dark",
+      "version": "1.0.1",
+      "path": "rices/ryoku-paper-dark",
+      "author": "Eduardo Vieira",
+      "summary": "Charcoal washi, bronze accents, and a quiet editorial Ryoku desktop.",
+      "description": "A dark paper-and-marble Ryoku desktop with a left rail, restrained bronze accents, and a classical marble statue against the Great Wave.",
+      "tags": [
+        "dark",
+        "paper",
+        "editorial",
+        "marble",
+        "warm"
+      ],
+      "accent": "#C79A49",
+      "surface": "#171512",
+      "preview": "screenshots/desktop.webp",
+      "screenshots": [
+        "screenshots/desktop.webp"
+      ],
+      "manifest": "rice.json",
+      "manifestSha256": "ddf3dc6a15683a935182130959cbb5c22533c78af4aaa165f9efa3f28e34fe76",
+      "createdWith": "0.63.1-beta.19",
+      "color": "fixed",
+      "palette": "rices/ryoku-paper-dark/palette.json",
+      "rounding": 8,
+      "wallpaper": "https://github.com/eduardojvieira/ryostore/releases/download/rices/ryoku-paper-dark-stoic-wall.png",
+      "upstream": "https://github.com/eduardojvieira/ryostore/tree/feat/ryoku-paper-rices/rices/ryoku-paper-dark",
+      "official": false,
+      "lastUpdated": "2026-09-28"
     }
   ]
 }

@@ -1,7 +1,8 @@
 # Writing a plugin
 
 A Ryoku plugin ships content the shell mounts into a host: a draggable tile on
-the wallpaper, or a popout that melts out of the screen frame on hover. You
+the wallpaper, a popout that melts out of the screen frame on hover, or a single
+mark on the QS Bar. You
 write two things - a service and a content view - and declare which hosts you
 support. The shell owns the surface, the placement, the motion, the focus, and
 the input region. You never touch any of that.
@@ -23,6 +24,61 @@ cp -r plugins/template plugins/my-plugin
 5. **Test it locally** (see below) - enable it in your shell and confirm it
    renders and behaves, then work the **Before you submit** checklist and PR.
 
+## Rules
+
+A plugin runs unsandboxed inside the user's shell, so every plugin follows the
+same eleven rules. Ryoku writes them into a scaffolded plugin's `AGENTS.md`, and
+Ryostore CI **will** run `ryoku plugin validate` on every plugin PR and block on
+the rules it can check.
+
+- **R1 Place.** A plugin is one folder named after its id, authored under
+  `$(xdg-user-dir DOCUMENTS)/ryoku-plugins/<id>/` (fallback
+  `~/ryoku-plugins/<id>/`); `ryoku plugin new <id>` creates it there. Never write
+  into `~/.local/share/ryoku/plugins/` (the receipt-owned install root) or
+  `~/.config/quickshell/` (the shipped shell).
+- **R2 Shape.** `manifest.json` at the root; `service/Main.qml` (logic, no UI);
+  `content/Widget.qml` (the one view); optional `content/Panel.qml` (a bar
+  panel); `README.md`; `LICENSE`; `assets/preview-widget.png` (a real capture);
+  scripts only under `bin/` with a shebang and the exec bit. Every extra file is
+  listed in manifest `files`.
+- **R3 Id.** Lowercase `[a-z0-9][a-z0-9-]*`, unique, and not a built-in widget
+  id.
+- **Which compositor is running is none of your business.** A plugin runs on
+  Hyprland and on niri, through one shell, and the only window and workspace state
+  it may read is what the Wayland protocols report (`ToplevelManager` for the
+  focused window and its app id, `IdleMonitor` for idle): the shell's own
+  singletons are not importable from a plugin, and a plugin that shells out to a
+  compositor (`hyprctl`, `niri msg`), reads a compositor config path, or branches
+  on which compositor is running is broken on the other one. Gate a
+  compositor-only feature on the capability it needs and leave it out where the
+  capability is absent.
+- **R4 Imports.** Only `QtQuick*`, `Quickshell*`, `Ryoku.PluginKit`,
+  `Ryoku.PluginKit.Singletons`, and files inside the plugin folder. Never
+  `shell.*`, `Ryoku.Ui*` internals, or a relative import that climbs out of the
+  folder.
+- **R5 Settings.** Declared in `metadata.settings`; read through
+  `pluginApi.pluginSettings` behind a default; written only through
+  `pluginApi.saveSetting(key, value)`. Never edit `shell.json` or `plugins.json`
+  directly.
+- **R6 Commands.** Every external program is in the plugin's own `bin/` or listed
+  in `dependencies.commands`. No `sudo`, `doas`, `su`. A privileged action is
+  allowed only through `pkexec`, only on an explicit click, only when listed in
+  manifest `capabilities.privileged` (exact command strings) and explained in the
+  README.
+- **R7 Network.** Every host the plugin talks to is listed in
+  `capabilities.network`. No `curl … | sh`, no downloading and running code.
+- **R8 Files.** Write only under `pluginApi.stateDir`
+  (`$XDG_STATE_HOME/ryoku/plugins/<id>`), `$XDG_CACHE_HOME/ryoku/plugins/<id>`,
+  or a temp dir. Never touch `~/.ssh`, `/etc`, shell rc files, or another
+  plugin's folder.
+- **R9 Shell.** No `sh -c` with a string built from settings or program output;
+  pass argv arrays.
+- **R10 Secrets and binaries.** No tokens, keys or credentials in the tree; no
+  compiled binaries (ELF/Mach-O/`.so`) and no symlinks; scripts only.
+- **R11 Honesty.** `official` is never `true` for a community plugin; `author` is
+  `Name <mail>`; the README says what runs, what it reads, what it writes, and
+  every privileged or network capability.
+
 ## The manifest
 
 `manifest.json` describes the plugin.
@@ -39,7 +95,7 @@ cp -r plugins/template plugins/my-plugin
 | `entryPoints` | The QML files the shell loads (see below). |
 | `files` | Extra files the install must fetch (helpers, assets) beyond the entry points. |
 | `capabilities.densities` | Which densities your content draws (see Density). |
-| `hosts` | The hosts your content supports: `desktopWidget`, `framePopout`. |
+| `hosts` | The hosts your content supports: `desktopWidget`, `framePopout`, `topbarGlyph`. |
 | `defaults` | Where it lands when first enabled (see Hosts). |
 | `commands` | Executables the plugin ships, e.g. `["bin/ryoku-foo"]`. |
 | `dependencies.commands` | Commands that must be present on the system. |
@@ -74,6 +130,10 @@ host; settings are a schema (below), not a hand-written page.
   right-clicks for its menu. Rendered at `compact` density.
 - **`framePopout`** - a popout that slides out of a screen edge on hover (or a
   plugins-menu key). Rendered at `full` density.
+- **`topbarGlyph`** - a single mark on the QS Bar (the top bar). The user adds it
+  from the bar's add-widget picker; a community bar widget also shows under QS Bar
+  Settings > Community, with its author, a switch, and its settings. Rendered at
+  `glyph` density.
 
 `defaults` is where the plugin lands when first enabled, plus its menu identity:
 
@@ -95,7 +155,8 @@ host; settings are a schema (below), not a hand-written page.
   that toggles a frame popout.
 - `icon` / `label` - the plugin's mark and name in menus and Settings.
 
-Declare only the hosts that make sense. Photo Frame is `desktopWidget` only.
+Declare only the hosts that make sense. Photo Frame is `desktopWidget` only; a
+bar widget is `topbarGlyph` only.
 
 ## Density
 
@@ -103,10 +164,12 @@ The host picks a density and sets it on your content. Today:
 
 - `desktopWidget` -> `compact`
 - `framePopout` -> `full`
+- `topbarGlyph` -> `glyph`
 
-`glyph` is a reserved single-mark density for tight contexts. Branch on
-`density` for the ones you draw, and list them in `capabilities.densities`. A
-desktop-only plugin only needs `["compact"]`.
+`glyph` is the single-mark density the QS Bar host renders at: one tight mark,
+no room for a full layout. Branch on `density` for the ones you draw, and list
+them in `capabilities.densities`. A desktop-only plugin only needs `["compact"]`;
+a bar widget only needs `["glyph"]`.
 
 ## The properties the shell sets
 
@@ -263,6 +326,7 @@ Settings -> Plugins -> Discover:
   "path": "plugins/my-plugin",
   "version": "0.1.0",
   "author": "Your Name",
+  "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/plugins/my-plugin",
   "official": false,
   "tagline": "One short line.",
   "description": "One sentence.",
@@ -275,8 +339,49 @@ Settings -> Plugins -> Discover:
 }
 ```
 
-`official: false` for community plugins. Keep `path` as `plugins/<id>`, `hosts`
-in sync with the manifest, and `lastUpdated` in `YYYY-MM-DD`.
+Keep `path` as `plugins/<id>`, `hosts` in sync with the manifest, and
+`lastUpdated` in `YYYY-MM-DD`. A few fields decide how the Store files it:
+
+- `tags` classify it by surface. A bar widget carries `"bar-widget"`; a desktop
+  plugin carries `"desktop-widget"` and/or `"frame-popout"`. The Store's
+  ALL / BAR / DESKTOP subtabs filter on this and on `hosts`.
+- `hosts` is copied from the manifest. It is what tells the shell, and the Store
+  filter, whether the plugin is a bar mark, a desktop tile, or both.
+- `upstream` (required) is the https project the plugin comes from - your repo,
+  or the catalogue folder if there is no separate home. The Store shows it as a
+  link icon on the detail page. `discord` (optional) is an author-contact invite
+  (`discord.gg/<code>` or `discord.com/invite/<code>`), shown as a Discord icon.
+- `official: true` is for plugins the Ryoku team maintains. Community plugins
+  leave it `false` (or omit it). A community plugin shows this warning in the
+  Store detail and under QS Bar Settings > Community, verbatim:
+
+  > Community plugin. Ryoku does not review or maintain it: it runs inside your
+  > shell with your permissions, so inspect its code before you trust it.
+
+## Share a widget from your desktop
+
+Built a widget in your own shell? You do not have to hand-write any of the above.
+From the desktop:
+
+- `ryoku plugin export <id>` copies the installed plugin into your Documents
+  folder (`ryoku-plugins/<id>/`, or `~/ryoku-plugins/<id>/`), writes its
+  `product-manifest.json` and a ready `registry-entry.json` (`official: false`),
+  and inits a git repo. Inspect it, tidy the README, drop in a real preview.
+- `ryoku plugin share <id>` goes the rest of the way: with `gh` logged in it
+  forks this repo, adds `plugins/<id>/`, upserts the registry entry, and opens
+  the pull request for you (it prints the URL). Without `gh` it opens the
+  submission form prefilled.
+
+Prefer to do it by hand? Drop the folder in `plugins/<id>/`, add its registry
+entry, then regenerate the manifest and hash with the packer:
+
+```
+tools/pack-product.py plugins/<id> --touch
+```
+
+It rewrites `plugins/<id>/product-manifest.json` (per-file sha256, size, and
+mode) and updates the entry's `manifestSha256` (and `lastUpdated`, with
+`--touch`). Then run `tests/validate-catalogue.sh` and open your PR.
 
 ## Before you submit
 
@@ -288,6 +393,10 @@ in sync with the manifest, and `lastUpdated` in `YYYY-MM-DD`.
       renders, drags, resizes, and every setting works, with a clean shell log.
 - [ ] Listed in `plugins/registry.json` with `path`, `hosts`, and `lastUpdated`
       correct.
+- [ ] Regenerated `product-manifest.json` and its `manifestSha256` with
+      `tools/pack-product.py plugins/<id>` after any file change.
 - [ ] `tests/validate-catalogue.sh` passes from the repo root.
+- [ ] `ryoku plugin validate <dir>` passes with no blocking findings; Ryostore
+      CI will run it on your PR.
 
 Then open your PR.

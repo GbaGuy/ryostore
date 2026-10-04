@@ -1,0 +1,95 @@
+{
+  "id": "vpn",
+  "name": "VPN",
+  "version": "2.0.0",
+  "author": "neur0map <hello@ryoku.dev>",
+  "description": "Watch and switch your VPN from the bar: a Tailscale switch with the tunnel's dossier, and your NetworkManager VPN and WireGuard profiles, in a bar panel or a desktop card.",
+  "license": "MIT",
+  "official": false,
+  "tags": [
+    "vpn",
+    "network",
+    "tailscale",
+    "bar-widget",
+    "desktop-widget"
+  ],
+  "entryPoints": {
+    "main": "service/Main.qml",
+    "content": "content/Widget.qml",
+    "panel": "content/Panel.qml"
+  },
+  "files": [
+    "content/Glyph.qml",
+    "content/Card.qml",
+    "content/InfoRow.qml",
+    "assets/preview-widget.png",
+    "assets/preview-desktop.png"
+  ],
+  "panel": {
+    "width": 320
+  },
+  "capabilities": {
+    "densities": [
+      "glyph",
+      "compact"
+    ],
+    "network": [
+      "login.tailscale.com"
+    ],
+    "privileged": [
+      "pkexec tailscale set --operator"
+    ]
+  },
+  "hosts": [
+    "topbarGlyph",
+    "desktopWidget"
+  ],
+  "defaults": {
+    "host": "topbarGlyph",
+    "desktopWidget": {
+      "bg": "none"
+    },
+    "icon": "vpn_lock",
+    "label": "VPN"
+  },
+  "dependencies": {
+    "commands": [
+      "tailscale",
+      "nmcli",
+      "wl-copy",
+      "xdg-open"
+    ]
+  },
+  "metadata": {
+    "settings": [
+      {
+        "key": "poll",
+        "type": "int",
+        "label": "Refresh seconds",
+        "group": "VPN",
+        "default": 10,
+        "min": 3,
+        "max": 60
+      },
+      {
+        "key": "barLabel",
+        "type": "choice",
+        "label": "Beside the mark",
+        "group": "VPN",
+        "default": "name",
+        "options": [
+          { "value": "none", "label": "Nothing" },
+          { "value": "name", "label": "Name" },
+          { "value": "ip", "label": "IP address" }
+        ]
+      },
+      {
+        "key": "confirmOff",
+        "type": "toggle",
+        "label": "Ask before turning off an exit-node VPN",
+        "group": "VPN",
+        "default": true
+      }
+    ]
+  }
+}

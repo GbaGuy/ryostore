@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "id": "rose-pine-moon",
+  "category": "ryotunes-skins",
+  "version": "1.0.0",
+  "destination": "ryoku/ryotunes-skins/rose-pine-moon",
+  "files": [
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "mode": "0644",
+      "size": 7048,
+      "install": false
+    },
+    {
+      "source": "PROVENANCE.txt",
+      "destination": "PROVENANCE.txt",
+      "sha256": "3eafecc9f24480408cced52a409bd8e5a1ab1550e3a512c3849a72942372eb48",
+      "mode": "0644",
+      "size": 825,
+      "install": true
+    },
+    {
+      "source": "preview.png",
+      "destination": "preview.png",
+      "sha256": "d78af3c9f6d02f07f102ea86f6d34a72357d6dfcd09e5e54c13a05ce4aad911b",
+      "mode": "0644",
+      "size": 183678,
+      "install": false
+    },
+    {
+      "source": "skin.json",
+      "destination": "skin.json",
+      "sha256": "6fa9d6d1ce92e58b50065482fcbf7fd34aa97f05686c76efc117e0df1f5c485e",
+      "mode": "0644",
+      "size": 772,
+      "install": true
+    }
+  ]
+}

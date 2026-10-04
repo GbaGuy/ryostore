@@ -8,6 +8,21 @@ authoring guide, linked below.
 [DEVELOP.md](DEVELOP.md) guide shows you how to point your running desktop at
 your local copy and watch it work. Do that first; it catches almost everything.
 
+## You maintain what you submit
+
+Community items and plugins are **not maintained by the Ryoku team**. You are
+responsible for returning to update your submission when Ryoku's shell, APIs,
+paths, dependencies, or security requirements change. Keep a reachable author or
+upstream contact, investigate reports, bump the product version, regenerate its
+manifest, and submit fixes. If you cannot maintain an item, tell us so it can be
+retired instead of silently breaking users' desktops.
+
+Store review and automated checks are screening, not security certification.
+Users still need to inspect the code they install. Explain what your item runs,
+reads, writes, and contacts; do not describe a green check as proof that it is
+safe. Follow [SECURITY.md](SECURITY.md) before submitting or updating executable
+content.
+
 ## The shape of a submission
 
 Ryostore is a catalogue repo. Every item is:
@@ -22,17 +37,23 @@ manifest fields:
 
 | You are adding | Start from | Full guide |
 | --- | --- | --- |
-| A shell plugin (widget / popout) | `plugins/template/` | [`plugins/AUTHORING.md`](plugins/AUTHORING.md) |
+| A shell plugin (desktop, popout, or QS Bar widget) | `plugins/template/` | [`plugins/AUTHORING.md`](plugins/AUTHORING.md) |
 | A rice (whole-desktop look) | Save current setup in Settings | [`rices/AUTHORING.md`](rices/AUTHORING.md) |
 | A colour scheme | `colorschemes/template/` | [`colorschemes/AUTHORING.md`](colorschemes/AUTHORING.md) |
 | A bundle (tool set) | `bundles/the-ricer/` | [`bundles/README.md`](bundles/README.md) |
 | A Nautilus script pack | `nautilus/video-reformat/` | [`nautilus/AUTHORING.md`](nautilus/AUTHORING.md) |
 | A live wallpaper | an existing `livewalls/<id>/` | [`livewalls/README.md`](livewalls/README.md) |
 | A fastfetch preset (terminal readout) | `fastfetch/ryoku-dossier/` | [`fastfetch/AUTHORING.md`](fastfetch/AUTHORING.md) |
+| A Ryotunes skin (palette, type, radii, motion) | `ryotunes-skins/template/` | [`ryotunes-skins/AUTHORING.md`](ryotunes-skins/AUTHORING.md) |
 | A lockscreen, bar style, launcher image, decor | an existing item in that catalogue | copy the layout of a neighbour |
 
 A colour scheme is the simplest: add `colorschemes/<name>/` following an existing
 scheme's layout, then add its entry to `colorschemes/registry.json`.
+
+Built a plugin in your own shell? `ryoku plugin export <id>` writes a ready folder
+and `registry-entry.json`, and `ryoku plugin share <id>` opens the pull request for
+you (with `gh` logged in) or prefills the submission form. Doing it by hand instead,
+regenerate the plugin's manifest and hash with `tools/pack-product.py plugins/<id>`.
 
 ## Two ways to submit
 
@@ -57,7 +78,7 @@ scales:
 ### 2. Fill in the submission form
 
 Not set up for a pull request, or want a maintainer to help land it? Open the
-[**submission form**](https://github.com/neur0map/ryostore/issues/new?template=submit-item.yml).
+[**submission form**](https://github.com/ryoku-dev/ryostore/issues/new?template=submit-item.yml).
 Tell us the kind, a short description, where the content lives (a repo, gist, or
 zip), and a preview image. A maintainer reviews it and opens the pull request
 with you.
@@ -69,7 +90,27 @@ with you.
   licensed for redistribution. Say so in the item's README or manifest.
 - A **`registry.json` entry** with the fields your catalogue's guide lists,
   `lastUpdated` in `YYYY-MM-DD`, and (for community work) `official: false`.
-- **`tests/validate-catalogue.sh` passing.**
+- An **`upstream`** on that entry: the https project the item comes from - your
+  repo, or the catalogue folder (`.../tree/main/<category>/<id>`) when there is no
+  separate home. The Store shows it as a link icon on the item. Add an optional
+  **`discord`** invite (`discord.gg/<code>` or `discord.com/invite/<code>`) to
+  offer author contact; leave it out if you have none.
+- **Catalogue integrity and security screening passing**, with every finding
+  resolved or explicitly reviewed under the security policy.
+- A clear **maintenance contact** and acknowledgement that ongoing maintenance
+  belongs to the contributor, not the Ryoku team.
+- **No window manager in the code.** Ryoku runs the same shell on Hyprland and on
+  niri, so an item reaches the desktop through the shell, never through one
+  compositor: no `hyprctl`, no compositor socket, no `Quickshell.Hyprland` (the
+  facade is `Ryoku.Ui.Singletons` -> `Wm` in a bar style, and the Quickshell
+  Wayland protocols in a plugin), no compositor config path, and no branching on
+  which compositor is running. A feature the compositor genuinely cannot do is
+  gated on the capability (`Wm.caps`), not on its name. An item that needs a
+  capability nothing else offers is compositor-exclusive content: say so in the
+  README, and declare it in your registry entry (`"windowManager": "<provider
+  name>"`, with an optional `windowManagerReason`). The Store then greys the item
+  out on any other window manager, says why, and refuses the install, so nothing
+  lands on a desktop that cannot run it, while an installed copy stays removable.
 
 That is the whole contract. When in doubt, copy the closest existing item and
 change one thing at a time.
