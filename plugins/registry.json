@@ -1354,6 +1354,35 @@
         "desktopWidget"
       ],
       "lastUpdated": "2026-10-02"
+    },
+    {
+      "id": "launchpad",
+      "name": "Launchpad",
+      "version": "0.1.0",
+      "path": "plugins/launchpad",
+      "author": "guyb <blumguy111@gmail.com>",
+      "summary": "A pinboard under one bar mark: your pick of widgets (clock, calendar, music, all-in-one, system stats, weather, notes, visualizer, or any...",
+      "description": "A pinboard under one bar mark: your pick of widgets (clock, calendar, music, all-in-one, system stats, weather, notes, visualizer, or any installed desktop-widget plugin), favourite apps and one-click commands. Reorder or hide anything.",
+      "tags": [
+        "bar-widget"
+      ],
+      "accent": "#8f8378",
+      "surface": "#101010",
+      "preview": "assets/preview-widget.png",
+      "screenshots": [
+        "assets/preview-widget.png",
+        "assets/preview-edit.png",
+        "assets/preview-panel.png"
+      ],
+      "manifest": "product-manifest.json",
+      "manifestSha256": "ec01062c137d202f175baa9281e3a8b1bbbacb86a02f787b81be291cc150c24d",
+      "official": false,
+      "tagline": "A pinboard under one bar mark: your pick of widgets (clock, calendar, music, all-in-one, system stats, weather, notes, visualizer, or any...",
+      "icon": "",
+      "hosts": [
+        "topbarGlyph"
+      ],
+      "lastUpdated": "2026-10-06"
     }
   ]
 }
