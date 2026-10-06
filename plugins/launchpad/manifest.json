@@ -38,6 +38,7 @@
     "commands": [
       "ryoku",
       "ryoku-shell",
+      "ryoku-app",
       "cava"
     ]
   },

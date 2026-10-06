@@ -118,7 +118,7 @@ Item {
         return (cmd.match(/"[^"]*"|'[^']*'|\S+/g) || []).map(a => a.replace(/^(["'])(.*)\1$/, "$2"));
     }
     function run(c) {
-        Quickshell.execDetached(svc.argv(c.cmd));
+        Quickshell.execDetached(["ryoku-app", "terminal", "--"].concat(svc.argv(c.cmd)));
         pluginApi.closePanel();
     }
     // installed desktop-widget plugins, hosted in the panel's Widgets section

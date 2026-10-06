@@ -26,7 +26,7 @@ Everything is also in QS Bar Settings > Community > Launchpad.
 
 ## What it runs, reads and writes
 
-- **Runs**: the apps you pin (through their `.desktop` entries); your quick
+  commands, exactly as you typed them, in your terminal (`ryoku-app terminal --`), as an argv split on spaces (quotes group
   commands, exactly as you typed them, as an argv split on spaces (quotes group
   words). There is **no shell**, so pipes, `&&` and `$VARS` do nothing; point a
   command at a script on your `PATH` if you need them. It also runs
