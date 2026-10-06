@@ -1361,6 +1361,7 @@
       "version": "0.4.0",
       "path": "plugins/strata",
       "author": "guyb <blumguy111@gmail.com>",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/plugins/strata",
       "summary": "Pick a local model and start or stop it from the bar.",
       "description": "Pick a local model and start or stop it from the bar. Finds Strata, TabbyAPI and llama.cpp engines and their models, one port per model.",
       "tags": [
