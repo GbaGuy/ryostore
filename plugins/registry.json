@@ -1282,7 +1282,7 @@
         "assets/preview-desktop.png"
       ],
       "manifest": "product-manifest.json",
-      "manifestSha256": "58a721b7939cf9b9d173bc770d3cc9c4627e0f9e6376cd2bc2d080614c287194",
+      "manifestSha256": "5493894e33ace5e10fd4dd4db0007e9b1a666178cee5927d106d8011e758b80c",
       "official": false,
       "tagline": "Watch and switch your VPN from the bar: a Tailscale switch with the tunnel's dossier, and your NetworkManager VPN and WireGuard profiles,...",
       "icon": "vpn_lock",
@@ -1291,6 +1291,69 @@
         "desktopWidget"
       ],
       "lastUpdated": "2026-09-02"
+    },
+    {
+      "id": "public-ip",
+      "name": "IP Pública",
+      "version": "0.1.0",
+      "path": "plugins/public-ip",
+      "author": "vampirejsv <vampirejsv@local>",
+      "summary": "Muestra la IP pública actual (consultando https://checkip.",
+      "description": "Muestra la IP pública actual (consultando https://checkip.amazonaws.com/) en la barra; un clic la copia al portapapeles.",
+      "tags": [
+        "bar-widget"
+      ],
+      "accent": "#8f8378",
+      "surface": "#101010",
+      "preview": "assets/preview-widget.png",
+      "screenshots": [
+        "assets/preview-widget.png"
+      ],
+      "manifest": "product-manifest.json",
+      "manifestSha256": "eced7c39a65f038744a15ea4577d65648243e948521fa46d80b1f107eb9b2cc0",
+      "official": false,
+      "tagline": "Muestra la IP pública actual (consultando https://checkip.",
+      "icon": "public",
+      "hosts": [
+        "topbarGlyph"
+      ],
+      "lastUpdated": "2026-09-29",
+      "upstream": "https://github.com/vampireJSV/ryoku-plugin-public-ip"
+    },
+    {
+      "id": "github-heatmap",
+      "name": "GitHub Heatmap",
+      "version": "0.7.1",
+      "path": "plugins/github-heatmap",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/plugins/github-heatmap",
+      "author": "safloresmo <safloresmo@gmail.com>",
+      "summary": "Your GitHub contribution calendar on the wallpaper, with quick styles, eight palettes, streaks and frosted glass.",
+      "description": "Your GitHub contribution calendar on the wallpaper, with quick styles, eight palettes, streaks and frosted glass.",
+      "tags": [
+        "github",
+        "contributions",
+        "heatmap",
+        "calendar",
+        "desktop-widget"
+      ],
+      "accent": "#8f8378",
+      "surface": "#101010",
+      "preview": "assets/preview-widget.png",
+      "screenshots": [
+        "assets/preview-widget.png",
+        "assets/preview-github.png",
+        "assets/preview-minimal.png",
+        "assets/preview-settings.png"
+      ],
+      "manifest": "product-manifest.json",
+      "manifestSha256": "198116bb38fc65e02fa7179e18ccd76b017623afc81be1ca82fd97e2da3c15f4",
+      "official": false,
+      "tagline": "Your GitHub contribution calendar on the wallpaper, with quick styles, eight palettes, streaks and frosted glass.",
+      "icon": "calendar_month",
+      "hosts": [
+        "desktopWidget"
+      ],
+      "lastUpdated": "2026-10-02"
     },
     {
       "id": "kdeconnect-status",
