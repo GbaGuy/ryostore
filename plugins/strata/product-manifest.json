@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "id": "launchpad",
+  "id": "strata",
   "category": "plugins",
-  "version": "0.1.0",
-  "destination": "ryoku/plugins/launchpad",
+  "version": "0.4.0",
+  "destination": "ryoku/plugins/strata",
   "files": [
     {
       "source": ".gitignore",
@@ -16,9 +16,9 @@
     {
       "source": "AGENTS.md",
       "destination": "AGENTS.md",
-      "sha256": "1ed2303778c198c25ba780642175eba1cac2f191ec0b3fe464847dac017cc54f",
+      "sha256": "0e08c37084d75f2911aa191bc73f3acf9744a9cd52604c556f96608bbf7a6894",
       "mode": "0644",
-      "size": 3958,
+      "size": 3955,
       "install": true
     },
     {
@@ -40,81 +40,65 @@
     {
       "source": "README.md",
       "destination": "README.md",
-      "sha256": "d5603e28f235be4f99a7c2851e67b3c87925586ba2e05d7d0329e211cf1cfe5a",
+      "sha256": "56ad9ad18147ed3dbb2774f6ba0d3e0432a1899ce4534183c66595cb22ac2f88",
       "mode": "0644",
-      "size": 4030,
-      "install": false
-    },
-    {
-      "source": "assets/preview-edit.png",
-      "destination": "assets/preview-edit.png",
-      "sha256": "f5bfaa348c13d1438b5f0f58b9412beb0314ab8bf1eb520b387c6a578ef3a9c1",
-      "mode": "0644",
-      "size": 55331,
+      "size": 2170,
       "install": false
     },
     {
       "source": "assets/preview-panel.png",
       "destination": "assets/preview-panel.png",
-      "sha256": "32387ed8cf6fbd941ee06c998bd20456342d1eaca4169576000ced47879139d2",
+      "sha256": "b2ad3f921d3f9cb782b8e0130d649ba5414e99efadb03e4360edfabfaa6c9b12",
       "mode": "0644",
-      "size": 45726,
+      "size": 144462,
       "install": false
     },
     {
       "source": "assets/preview-widget.png",
       "destination": "assets/preview-widget.png",
-      "sha256": "696ba6fce98962e2bb20d57fa31e4aa704baf9e8997808c215cd4ae4ef4e5661",
+      "sha256": "3ada94879c01839c1a4baf29b1b51a1e5ec696a7f674b28d0c85e893ce513f08",
       "mode": "0644",
-      "size": 15883,
+      "size": 5075,
       "install": false
     },
     {
-      "source": "content/DeskWidgets.qml",
-      "destination": "content/DeskWidgets.qml",
-      "sha256": "f681f24300f1b4b80d055b15a02b25861bed486532690aa89d28404cf1dca215",
-      "mode": "0644",
-      "size": 25327,
-      "install": true
-    },
-    {
-      "source": "content/OrderList.qml",
-      "destination": "content/OrderList.qml",
-      "sha256": "1d92e1a46df06e337f478ec5430c63f9cb7157be1cc4df31430dd00ffd055bae",
-      "mode": "0644",
-      "size": 6100,
+      "source": "bin/strata-models",
+      "destination": "bin/strata-models",
+      "sha256": "c0e9dc5417e424ce05dca1eb61f93203ee737b27df56371ef87e426a484c2d9e",
+      "mode": "0755",
+      "size": 5313,
       "install": true
     },
     {
       "source": "content/Panel.qml",
       "destination": "content/Panel.qml",
-      "sha256": "400d82b7de3df92ecc9d1a9d46f5d502427ac39b245a2f29dc5c0b4f2004238f",
+      "sha256": "37a7dffed499a0c95392d201a1d15f2ab7f0bf8b89b91297f0baab209c2fa927",
       "mode": "0644",
-      "size": 25119,
+      "size": 15317,
       "install": true
     },
     {
       "source": "content/Widget.qml",
       "destination": "content/Widget.qml",
-      "sha256": "a61466c500a46003c20addcc12db423a307cef87a1b1ba152faa575269ee38f8",
+      "sha256": "6f72d1d6e42efef0c5d38415278d3538d5eabebb3c853a7f5ba50e151e1dca62",
       "mode": "0644",
-      "size": 1242,
+      "size": 2718,
       "install": true
     },
     {
       "source": "manifest.json",
       "destination": "manifest.json",
-      "sha256": "88694053ad1a9eaa3d0ea312750ad776fc02b25bf5519f553142326582e81596",
+      "sha256": "bfa159a4299775ec7bf90851a9b2f0cba75cdeb98356103f2871e98e41c5dbec",
       "mode": "0644",
-      "size": 2887,
+      "size": 1549,
       "install": true
     },
     {
       "source": "service/Main.qml",
       "destination": "service/Main.qml",
-      "sha256": "a168692c516adcbe3728e71533ec16dba1ecce478cfce583c71a8cc811b14183",
+      "sha256": "e846230a44d906bd4b434377fbee09272693c9041d2baefdbd3c25447151866a",
       "mode": "0644",
-      "size": 11737,
+      "size": 4538,
       "install": true
     }
   ]
