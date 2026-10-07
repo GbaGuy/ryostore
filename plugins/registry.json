@@ -1382,6 +1382,35 @@
       ],
       "lastUpdated": "2026-09-29",
       "upstream": "https://github.com/vampireJSV/ryoku-plugin-kdeconnect-status"
+    },
+    {
+      "id": "strata",
+      "name": "Local LLM Manager",
+      "version": "0.4.0",
+      "path": "plugins/strata",
+      "author": "guyb <blumguy111@gmail.com>",
+      "upstream": "https://github.com/ryoku-dev/ryostore/tree/main/plugins/strata",
+      "summary": "Pick a local model and start or stop it from the bar.",
+      "description": "Pick a local model and start or stop it from the bar. Finds Strata, TabbyAPI and llama.cpp engines and their models, one port per model.",
+      "tags": [
+        "bar-widget"
+      ],
+      "accent": "#8f8378",
+      "surface": "#101010",
+      "preview": "assets/preview-widget.png",
+      "screenshots": [
+        "assets/preview-widget.png",
+        "assets/preview-panel.png"
+      ],
+      "manifest": "product-manifest.json",
+      "manifestSha256": "c0f9626812f2b8e155247286d14d53cfcbf9982f9897bc2a9134335971b1b923",
+      "official": false,
+      "tagline": "Pick a local model and start or stop it from the bar.",
+      "icon": "",
+      "hosts": [
+        "topbarGlyph"
+      ],
+      "lastUpdated": "2026-10-06"
     }
   ]
 }
